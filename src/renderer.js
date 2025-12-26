@@ -442,8 +442,8 @@ export class Renderer {
         if (this.settings.frame !== 'none') {
             const config = this.overlaySettings[this.settings.frame];
             const filename = config ? config.src : `frame-${this.settings.frame}.png`;
-            const newSrc = `/${filename}`;
-            
+            // Use Vite base path for overlays
+            const newSrc = `${import.meta.env.BASE_URL}${filename}`;
             // Only update src if it changed or if it's empty (initial load)
             if (this.settings.frame !== oldFrame || !this.frameElement.getAttribute('src')) {
                 this.frameElement.src = newSrc;
